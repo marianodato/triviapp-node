@@ -1,0 +1,79 @@
+<div class="modal fade" id="addGameModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{> add_game_modal }}
+        </div>
+    </div>
+</div>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Admin
+                    <small>Games</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-user-o"></i>  <a href="/user/profile">Admin</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-file-text-o"></i> Games
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addGameModal"
+                   role="button">Add Game &raquo;</a>
+            </div>
+        </div>
+
+        <h2>Games</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped" id="examsTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>name</th>
+                    <th>Start Date</th>
+                    <th>Presenter</th>
+                    <th>Status</th>
+                    <th>Prize</th>
+                    <th>Language</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {{#each games}}
+                    <tr>
+                        <td>{{_id}}</td>
+                        <td>{{name}}</td>
+                        <td>{{start_date}}</td>
+                        <td>{{presenter.name}}</td>
+                        <td>{{status}}</td>
+                        <td>{{prize}}</td>
+                        <td>{{language_code}}</td>
+                        <td><a class="edit-link" href="/admin/games/show-profile/{{_id}}"><i class="fa fa-user"></i>
+                            Entrar</a></td>
+
+                    </tr>
+                {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+
+<script src="/javascripts/admin/games.js"></script>

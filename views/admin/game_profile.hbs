@@ -1,0 +1,191 @@
+<link href="/stylesheets/bootstrap-editable.css" rel="stylesheet">
+
+<div class="modal fade" id="setGamePendingConfirmationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{> confirm_modal confirmation_title='Set Game Pending'
+                    confirmation_message='Are you sure you want to change game status to "pending"?'
+                    confirm_button_id='set_game_pending_confirm_button' }}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="startGameConfirmationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{> confirm_modal confirmation_title='Start Game'
+                    confirmation_message='Are you sure you want to change game status to "started"?'
+                    confirm_button_id='start_game_confirm_button'}}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="endGameConfirmationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{> confirm_modal confirmation_title='End Game'
+                    confirmation_message='Are you sure you want to change game status to "finished"?'
+                    confirm_button_id='end_game_confirm_button' }}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showQuestionConfirmationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{> confirm_modal confirmation_title='Show Question'
+                    confirmation_message='Are you sure you want to show the question?'
+                    confirm_button_id='show_question_confirm_button' }}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="saveGameWinnersConfirmationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{> confirm_modal confirmation_title='Save Game Winners'
+                    confirmation_message='Are you sure you want to save the winners?'
+                    confirm_button_id='save_game_winners_confirm_button' }}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showGameWinnersConfirmationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{> confirm_modal confirmation_title='Show Game Winners'
+                    confirmation_message='Are you sure you want to show the winners?'
+                    confirm_button_id='show_game_winners_confirm_button' }}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showQuestionSummaryConfirmationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{> confirm_modal confirmation_title='Show Question Summary'
+                    confirmation_message='Are you sure you want to show the question summary?'
+                    confirm_button_id='show_question_summary_confirm_button' }}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addQuestionsModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{> add_question_modal }}
+        </div>
+    </div>
+</div>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Admin
+                    <small>Game Profile</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-user-o"></i>  <a href="/admin/games">Admin</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-file-text-o"></i> Game Profile
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Status: {{game.status}}</h4>
+                <h4>Prize: {{game.prize}}</h4>
+                <h4>Start Date: {{game.start_date}}</h4>
+                <h4>Streaming URL: <a href="#" id="streaming_url_editable" data-pk="{{game._id}}">{{game.config.streaming_url}}</a></h4>
+                <h4>Socket URL: <a href="#" id="socket_url_editable" data-pk="{{game._id}}">{{game.config.socket_url}}</a></h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="#" class="btn btn-primary btn-lg" onclick="showAddQuestionModal('{{game._id}}')"
+                   role="button">Add Questions to Game &raquo;</a>
+
+                <a href="#" class="btn btn-warning btn-lg" onclick="showSetGamePendingConfirmationModal('{{game._id}}')"
+                   role="button">Set pending &raquo;</a>
+
+                <a href="#" class="btn btn-success btn-lg" onclick="showStartGameConfirmationModal('{{game._id}}')"
+                   role="button">Start Game &raquo;</a>
+
+                <a href="#" class="btn btn-danger btn-lg" onclick="showEndGameConfirmationModal('{{game._id}}')"
+                   role="button">Finish Game &raquo;</a>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 20px">
+            <div class="col-lg-12">
+
+                <a href="#" class="btn btn-default btn-lg" onclick="saveGameWinnersConfirmationModal('{{game._id}}')"
+                   role="button">Save Winners &raquo;</a>
+
+                <a href="#" class="btn btn-default btn-lg" onclick="showGameWinnersConfirmationModal('{{game._id}}')"
+                   role="button">Show Winners &raquo;</a>
+
+            </div>
+        </div>
+
+        <h2>Questions</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped" id="examsTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Question</th>
+                    <th>Options</th>
+                    <th>TTS (s)</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {{#each questions}}
+                    <tr>
+                        <td>{{_id}}</td>
+                        <td>{{question}}</td>
+                        <td>
+                            <select class="form-control">
+                                {{#each answers}}
+                                    <option {{#if (isCorrectAnswer this.option_number ../correct_option_number)}}selected="selected"{{/if}} disabled>{{answer}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                        <td>{{time_should_show}}</td>
+                        <td>{{status}}</td>
+
+                        {{#unless (questionIsShowed this)}}
+                            <td><a disabled class="edit-link" onclick="showQuestionConfirmationModal({{toJson this}})"><i class="fa fa-user"></i>
+                                Show Question</a></td>
+                        {{/unless}}
+                        {{#unless questionResumeIsShowed}}
+                            <td><a class="edit-link" onclick="showQuestionSummaryConfirmationModal()"><i class="fa fa-user"></i>
+                                Show Resume</a></td>
+                        {{/unless}}
+                    </tr>
+                {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+
+<script src="/javascripts/admin/game_profile.js"></script>
+<script src="/javascripts/admin/bootstrap-editable.min.js"></script>

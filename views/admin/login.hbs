@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+    <link rel='stylesheet prefetch'
+          href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+
+    <link href="../../stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="../../stylesheets/login/login.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="pen-title">
+    <h1>Prodius</h1><span>Ingresar</span>
+</div>
+<div class="container">
+
+    <div class="card"></div>
+    <div class="card">
+        <img src="/images/logotipo.png" style="max-height: 100px; text-align: center; display: block; margin: auto;">
+        <h1 class="title">Login</h1>
+        <div>
+            <div class="input-container">
+                <input type="mail" id="mailLabel" required="required" name="mail"/>
+                <label for="mailLabel">Mail</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="password" id="passwordLabel" required="required" name="password"/>
+                <label for="passwordLabel">Password</label>
+                <div class="bar"></div>
+            </div>
+            <div class="button-container">
+                <button onclick="login()"><span>Entrar</span></button>
+            </div>
+
+            {{#if error}}
+                <div class="container" id="error">
+                    <div class="col-lg-12">
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="fa fa-info-circle"></i> <strong>{{errorTitle}}</strong> {{error}}
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+
+        </div>
+    </div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="../../javascripts/admin/login.js"></script>
+
+</body>
+</html>

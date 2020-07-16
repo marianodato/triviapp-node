@@ -1,0 +1,55 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    socket.on('players-count', function(msg) {
+        $('#txt_players_count').text(msg);
+    });
+
+    socket.on('new-question', function(msg) {
+        $('#txt_question').text(msg.question);
+        $('#txt_option_0').text(msg.answers[0].answer);
+        $('#txt_option_1').text(msg.answers[1].answer);
+        $('#txt_option_2').text(msg.answers[2].answer);
+    });
+
+    socket.on('question-summary', function(msg) {
+        $('#txt_players_count').text(msg);
+    });
+</script>
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Admin
+                    <small>RT Dashboard</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-user-o"></i>  <a href="/admin/games">Admin</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-file-text-o"></i> RT Dashboard
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <i class="fa fa-eye"></i><h1 id="txt_players_count"></h1>
+
+        <h1 id="txt_question"></h1>
+        <h1 id="txt_option_0"></h1>
+        <h1 id="txt_option_1"></h1>
+        <h1 id="txt_option_2"></h1>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->

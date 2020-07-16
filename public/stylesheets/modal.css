@@ -1,0 +1,54 @@
+/*body {
+  padding-bottom: 40px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}*/
+
+.modal-header {
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #377bb5;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-title {
+    color: white
+}
+
+.modal-body {
+    background-color: #EEEEEE;
+}
+
+.modal-footer {
+    background-color: #EEEEEE;
+}
+
+.textfield {
+    padding: 16px;
+    background-color: #f8f8f8;
+    border-color: #DDDDDD;
+    border-width: 0.5px;
+}
+
+.bigg-textfield {
+    padding-left: 16px;
+    background-color: #f8f8f8;
+    border-color: #DDDDDD;
+    border-width: 0.5px;
+}
+
+.cancel-button {
+    color: white;
+    background-color: #777777;
+}
+
+.save-button {
+    color: white;
+    background-color: #fa6362;
+}
+
+/*tr:nth-child(even){background-color: #f2f2f2}*/
