@@ -8,7 +8,7 @@
     "start:production": "export DEBUG=TRACE,triviapp:*; node ./bin/www.js"
   },
   "dependencies": {
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.0",
     "body-parser": "~1.18.2",
     "debug-logger": "^0.4.1",
     "express": "^4.16.3",
